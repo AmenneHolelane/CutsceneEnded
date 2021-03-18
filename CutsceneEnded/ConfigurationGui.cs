@@ -5,19 +5,15 @@ namespace CutsceneEnded
 {
     class ConfigurationGui
     {
-        static bool windowWasOpen = false;
         public static void Draw(CutsceneEnded plugin)
         {
             if (!plugin.isConfigOpen)
             {
-                if (windowWasOpen)
-                {
-                    plugin.configuration.Save();
-                    windowWasOpen = false;
-                }
+                plugin.configuration.Save();
+                //plugin.pi.Framework.Gui.Chat.Print("[CutsceneEnded] Configuration saved");
+                plugin.pi.UiBuilder.OnBuildUi -= plugin.DrawSettings;
                 return;
             }
-            windowWasOpen = true;
             ImGui.PushStyleVar(ImGuiStyleVar.WindowMinSize, new Vector2(450, 200));
             if (ImGui.Begin("Cutscene Ended configuration", ref plugin.isConfigOpen))
             {

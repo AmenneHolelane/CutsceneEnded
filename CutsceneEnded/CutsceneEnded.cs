@@ -35,17 +35,20 @@ namespace CutsceneEnded
             configuration.Initialize(pi);
             pi.Framework.OnUpdateEvent += HandleFrameworkUpdate;
             pi.UiBuilder.OnOpenConfigUi += OnGuiOpen;
-            pi.UiBuilder.OnBuildUi += DrawSettings;
         }
 
-        private void DrawSettings()
+        public void DrawSettings()
         {
             ConfigurationGui.Draw(this);
         }
 
         private void OnGuiOpen(object sender, EventArgs e)
         {
-            isConfigOpen = true;
+            if (!isConfigOpen)
+            {
+                isConfigOpen = true;
+                pi.UiBuilder.OnBuildUi += DrawSettings;
+            }
         }
 
         private void HandleFrameworkUpdate(Framework framework)
@@ -78,12 +81,12 @@ namespace CutsceneEnded
                         Visible = true
                     };
                     n.ShowBalloonTip(int.MaxValue, "", "Cutscene ended", ToolTipIcon.Info);
-                    n.BalloonTipClosed += delegate (object sender, EventArgs e)
+                    n.BalloonTipClosed += delegate
                     {
                         n.Visible = false;
                         n.Dispose();
                     };
-                    n.BalloonTipClicked += delegate (object sender, EventArgs e)
+                    n.BalloonTipClicked += delegate
                     {
                         n.Visible = false;
                         n.Dispose();
