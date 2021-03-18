@@ -18,15 +18,15 @@ namespace CutsceneEnded
                 return;
             }
             windowWasOpen = true;
-            ImGui.PushStyleVar(ImGuiStyleVar.WindowMinSize, new Vector2(400, 200));
+            ImGui.PushStyleVar(ImGuiStyleVar.WindowMinSize, new Vector2(450, 200));
             if (ImGui.Begin("Cutscene Ended configuration", ref plugin.isConfigOpen))
             {
-                ImGui.Text("On cutscene end if FFXIV running in background:");
-                ImGui.Checkbox("Show toast notification", ref plugin.configuration.ShowToastNotification);
-                ImGui.Checkbox("Flash tray icon", ref plugin.configuration.FlashTrayIcon);
-                ImGui.Checkbox("Bring FFXIV foreground", ref plugin.configuration.AutoActivateWindow);
+                ImGui.Text("When cutscene ends do the following if FFXIV is running in background:");
+                ImGui.Checkbox("Show tray notification", ref plugin.configuration.ShowToastNotification);
+                ImGui.Checkbox("Flash taskbar icon", ref plugin.configuration.FlashTrayIcon);
+                ImGui.Checkbox("Bring FFXIV to foreground", ref plugin.configuration.AutoActivateWindow);
                 ImGui.Text("Zone locking:");
-                ImGui.Checkbox("Only trigger on MSQ roulette dungeons", ref plugin.configuration.OnlyMSQ);
+                ImGui.Checkbox("Only trigger in MSQ roulette dungeons", ref plugin.configuration.OnlyMSQ);
             }
             ImGui.PopStyleVar();
         }
